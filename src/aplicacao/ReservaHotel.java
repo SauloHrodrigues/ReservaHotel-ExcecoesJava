@@ -23,6 +23,8 @@ public class ReservaHotel {
 		
 		System.out.print("Digite a data de saída(dd/mm/aaaa): ");
 		Date dDataDeSaida = sdf.parse(input.next());
+		
+		
 		if(!dDataDeSaida.after(dDataDeEntrada)) {
 			System.out.println("Erro na reserva: Data de entrada posterior a data de saída!");
 		}else {
@@ -31,22 +33,18 @@ public class ReservaHotel {
 			System.out.println();
 			
 			System.out.println("Atualize a reserva:");
-			System.out.print("Digite o número do quarto: ");
-			iNumeroDoQuarto = input.nextInt();
+			
 			System.out.print("Digite a data de entrada(dd/mm/aaaa): ");
 			dDataDeEntrada = sdf.parse(input.next());			
 			System.out.print("Digite a data de saída(dd/mm/aaaa): ");
 			dDataDeSaida = sdf.parse(input.next());
-			Date dHoje = new Date();
-			
-			if(dDataDeEntrada.before(dHoje)|| dDataDeSaida.before(dHoje)) {
-				System.out.println("Erro na reserva: As datas devem ser futuras!");
-			}else if(!dDataDeSaida.after(dDataDeEntrada)) {
-				System.out.println("Erro na reserva: Data de entrada posterior a data de saída!");
+			String erro = reserva.atualizaDatas(dDataDeEntrada, dDataDeSaida);
+			if(erro !=null) {
+				System.out.println("Erro na reserva: "+erro);
 			}else {
-				reserva.atualizaDatas(dDataDeEntrada, dDataDeSaida);			
-				System.out.println("Reserva realizada: "+reserva);
+				System.out.println("Reserva: "+reserva);
 			}
+			
 		}
 		
 		

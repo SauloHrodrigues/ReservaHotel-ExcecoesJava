@@ -41,9 +41,17 @@ public class Reserva {
 		return TimeUnit.DAYS.convert(diferenca, TimeUnit.MILLISECONDS); // converte Milesegundos em dias
 	}
 
-	public void atualizaDatas(Date dDataEntrada, Date dDataSaida) {
+	public String atualizaDatas(Date dDataEntrada, Date dDataSaida) {
+		Date dHoje = new Date();
+		
+		if(dDataEntrada.before(dHoje)|| dDataSaida.before(dHoje)) {
+			return " As datas devem ser futuras!";
+		} if(!dDataSaida.after(dDataEntrada)) {
+			return " Data de entrada posterior a data de saída!";
+		}
 		this.dDataEntrada = dDataEntrada;
 		this.dDataSaida = dDataSaida;
+		return null;// sem erro
 	}
 
 	@Override
